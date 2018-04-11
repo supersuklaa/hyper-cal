@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>calndr</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <style>
+    :root {
+      --holder-width: 475px;
+    }
+    #holder {
+      max-width: var(--holder-width);
+      margin: auto;
+    }
+    .month .table {
+      display: grid;
+		  grid-template-columns: repeat(7, 1fr);
+    }
+    .month .table .day {
+      text-align: center;
+    }
+    .hide {
+      display: none;
+    }
+    .editor {
+      color: orange;
+      background: black;
+      position: absolute;
+      width: var(--holder-width);
+      top: 0;
+      min-height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <script src="./dist/bundle.js"></script>
+</body>
+</html>
