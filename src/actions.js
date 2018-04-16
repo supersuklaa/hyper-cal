@@ -1,22 +1,6 @@
 import { utils } from "./utils"
 
 export const actions = {
-  // init: () => (state, actions) => {
-
-
-  //   actions.renderCalender({
-  //     year: d.getFullYear(),
-  //     month: d.getMonth() + 1
-  //   })
-
-  //   actions.renderEditor({
-  //     year: d.getFullYear(),
-  //     month: d.getMonth() + 1,
-  //     day: d.getDate()
-  //   })
-
-  // },
-
   nav: value => (state, actions) => {
     if (value === "next")
       actions.next()
@@ -42,11 +26,40 @@ export const actions = {
       month: value.month,
       firstDay: utils.getFirstDay(value.year, value.month),
       days: utils.getDaysInMonth(value.year, value.month),
-    }
+    },
+    showForm: false
   }),
 
   renderEditor: value => state => ({
-    editor: value
+    editor: value,
+    events: utils.getData(value.id),
+    showForm: false
+  }),
+
+  showForm: () => state => ({
+    showForm: true
+  }),
+
+  setName: value => state => ({
+    formData: {name: value, start: state.formData.start}
+  }),
+
+  setStartTime: value => state => ({
+    formData: {name: state.formData.name, start: value}
+  }),
+
+  createEvent: value => (state, actions) => {
+		let data = utils.getData(value).concat(state.formData)
+
+    localStorage.setItem(value, JSON.stringify(data))
+
+    actions.cleanUpAfterAdd(value)
+  },
+
+  cleanUpAfterAdd: value => state => ({
+    formData: {name: "", start: ""},
+    showForm: false,
+    events: utils.getData(value)
   }),
 
 }

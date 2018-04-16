@@ -2,7 +2,7 @@ import { utils } from "./utils"
 
 const d = new Date()
 
-const curr = {
+const init = {
   year: d.getFullYear(),
   month: d.getMonth() + 1,
   day: d.getDate()
@@ -10,11 +10,20 @@ const curr = {
 
 export const state = {
   calendar: {
-    year: curr.year,
-    month: curr.month,
-    firstDay: utils.getFirstDay(curr.year, curr.month),
-    days: utils.getDaysInMonth(curr.year, curr.month),
+    year: init.year,
+    month: init.month,
+    firstDay: utils.getFirstDay(init.year, init.month),
+    days: utils.getDaysInMonth(init.year, init.month),
   },
 
-  editor: curr
+  editor: init,
+
+  events: utils.getData(init.year + "-" + init.month + "-" + init.day),
+
+  showForm: false,
+
+  formData: {
+    name: "",
+    start: ""
+  }
 }

@@ -91,12 +91,28 @@
       font-size: 24px;
       font-weight: 300;
     }
+    .editor a {
+      color: var(--hilight-color);
+      text-decoration: none;
+    }
+    .editor .create-event {
+      color: var(--hilight-color);
+    }
+    .editor input {
+      background: var(--holder-background);
+      border: 0;
+      padding: 5px;
+      margin: 10px;
+      color: var(--main-text-color);
+      font-weight: 300;
+      font-size: 24px;
+    }
     .editor ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
-    .editor .create-button {
+    .editor .show-form-button {
       position: absolute;
       padding: 12px;
       bottom: 0;
@@ -105,6 +121,9 @@
       font-weight: 700;
       color: var(--hilight-color);
       cursor: pointer;
+    }
+    .editor .hidden {
+      display: none;
     }
   </style>
 </head>
