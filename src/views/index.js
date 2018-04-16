@@ -1,19 +1,25 @@
 import { h } from "hyperapp"
 import { actions } from "../actions"
-import { MonthItem } from "./month"
+import { HeaderItem } from "./header"
+import { CalendarItem } from "./calendar"
 import { EditorItem } from "./editor"
 
-const current = {
-  year: new Date().getFullYear(),
-  month: new Date().getMonth() + 1
-}
-
 export const view = (state, actions) => (
-  <div id="holder" oncreate={() => actions.renderMonth(current)}>
-    {state.months.map(({ year, month, firstDay, days }) => (
-      <MonthItem year={year} month={month} firstDay={firstDay} days={days} />
-    ))}
-    <button onclick={() => actions.renderMonth(state.next)}>Next month</button>
-    <EditorItem editor={state.editor} />
+  <div id="holder">
+    <HeaderItem
+      year={state.calendar.year}
+      month={state.calendar.month}
+    />
+    <CalendarItem
+      year={state.calendar.year}
+      month={state.calendar.month}
+      firstDay={state.calendar.firstDay}
+      days={state.calendar.days}
+    />
+    <EditorItem
+      year={state.editor.year}
+      month={state.editor.month}
+      day={state.editor.day}
+    />
   </div>
 )

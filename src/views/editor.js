@@ -1,10 +1,19 @@
 import { h } from "hyperapp"
 import { actions } from "../actions"
 
-export const EditorItem = ({ editor }) => (state, actions) => (
-  <div class={"editor " + displayClass(editor.display)}>
-    {editor.value}
+export const EditorItem = ({ year, month, day }) => (
+  <div class="editor">
+    <h2>{day}.</h2>
+    <ul>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+    </ul>
+    <CreateButton />
   </div>
 )
 
-const displayClass = d => d ? "show" : "hide"
+const CreateButton = ({ }) => (
+  <div class="create-button">
+    +
+  </div>
+)
