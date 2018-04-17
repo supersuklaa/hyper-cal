@@ -1,5 +1,6 @@
 import { h } from "hyperapp"
 import { actions } from "../actions"
+import { utils } from "../utils"
 
 export const CalendarItem = ({ year, month, firstDay, days }) => (
   <div class="calendar" data-id={year + "-" + month}>
@@ -22,7 +23,7 @@ export const CalendarItem = ({ year, month, firstDay, days }) => (
 )
 
 const DayItem = ({ date }) => (state, actions) => (
-  <div class="day" onclick={() => actions.renderEditor(date)}>
+  <div class={dayClass(date, state.editor)} onclick={() => actions.renderEditor(date)}>
     {date.day} 
   </div>
 )
@@ -38,3 +39,13 @@ const repeat = (length, iteratee) => {
   return out
 
 }   
+
+const dayClass = (date, editor) => {
+  let result = "day"
+
+  if (date.id === editor.id) result += " editing"
+
+  if (utils.hasData(date.id)) result += " has"
+
+  return result
+}

@@ -30,6 +30,8 @@ export const utils = {
     return (localStorage.getItem(d))
       ? JSON.parse(localStorage.getItem(d))
       : []
-  }
+  },
+
+  hasData: d => (localStorage.getItem(d)) ? true : false
 
 }

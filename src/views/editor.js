@@ -3,7 +3,7 @@ import { actions } from "../actions"
 
 export const EditorItem = ({ year, month, day }) => (
   <div class="editor">
-    <h2>{day}. {month}. {year}</h2>
+    {/* <h2>{day}.</h2> */}
     <EventList id={year + "-" + month + "-" + day} />
     <CreateEventForm id={year + "-" + month + "-" + day} />
     <ShowFormButton />

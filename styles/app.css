@@ -1,0 +1,124 @@
+:root {
+    --main-font: 'Helvetica Neue', sans-serif;
+
+    --holder-width: 475px;
+    --holder-background: #1d1d1d;
+
+    --main-text-color: #4c4c4c;
+    --main-background: #191919;
+
+    --cal-background: #171717;
+    --cal-text: #797979;
+
+    --hilight-color: #cf8f64; 
+
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--main-font);
+    background: var(--main-background);
+    height: 100%;
+    color: var(--main-text-color);
+}
+#holder {
+    background: var(--holder-background);
+    max-width: var(--holder-width);
+    margin: auto;
+    height: 100%;
+}
+.header {
+    display: grid;
+    grid-gap: 15px;
+        grid-template-columns: repeat(7, 1fr);
+}
+.header > div {
+    padding: 20px;
+    text-align: center;
+}
+.header .prev-button {
+        grid-column: 1;
+}
+.header .title {
+        grid-column: 2 / 7;
+}
+.header .next-button {
+        grid-column: 7;
+}
+.header .button {
+    font-size: 24px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.header .title h1 {
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+.calendar {
+    background: var(--cal-background);
+    font-size: 14px;
+    font-weight: 300;
+    padding: 20px 0;
+}
+.calendar .table {
+    display: grid;
+    grid-gap: 15px;
+        grid-template-columns: repeat(7, 1fr);
+}
+.calendar .table .day {
+    text-align: center;
+    cursor: pointer;
+}
+.calendar .table .day.has {
+    color: var(--hilight-color);
+}
+.calendar .table .day.editing {
+    color: #adadad;
+}
+.editor {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    padding: 20px;
+}
+.editor h2 {
+    font-size: 24px;
+    font-weight: 300;
+}
+.editor a {
+    color: var(--hilight-color);
+    text-decoration: none;
+}
+.editor .create-event {
+    color: var(--hilight-color);
+}
+.editor input {
+    background: var(--holder-background);
+    border: 0;
+    padding: 5px;
+    margin: 10px;
+    color: var(--main-text-color);
+    font-weight: 300;
+    font-size: 24px;
+}
+.editor ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.editor .show-form-button {
+    position: absolute;
+    padding: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-weight: 700;
+    color: var(--hilight-color);
+    cursor: pointer;
+}
+.editor .hidden {
+    display: none;
+}
