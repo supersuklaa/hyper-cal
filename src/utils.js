@@ -26,11 +26,13 @@ export const utils = {
   
   getMonthTitle: d => d.month + " / " + d.year,
 
-  getData: d => {
-    return (localStorage.getItem(d))
-      ? JSON.parse(localStorage.getItem(d))
+  getData: id => {
+    return (localStorage.getItem(id))
+      ? JSON.parse(localStorage.getItem(id))
       : []
   },
+
+  setData: (value, data) => localStorage.setItem(value, JSON.stringify(data)),
 
   hasData: d => (localStorage.getItem(d)) ? true : false
 

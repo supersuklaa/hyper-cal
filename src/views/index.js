@@ -17,9 +17,8 @@ export const view = (state, actions) => (
       days={state.calendar.days}
     />
     <EditorItem
-      year={state.editor.year}
-      month={state.editor.month}
-      day={state.editor.day}
+      editor={state.editor}
+      showForm={state.showForm}
     />
   </div>
 )

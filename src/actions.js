@@ -12,12 +12,14 @@ export const actions = {
     actions.renderCalender(
       utils.getNextMonth(state.calendar)
     )
+    actions.hideEditor()
   },
 
   prev: () => (state, actions) => {
     actions.renderCalender(
       utils.getPrevMonth(state.calendar)
     )
+    actions.hideEditor()
   },
 
   renderCalender: value => state => ({
@@ -27,7 +29,12 @@ export const actions = {
       firstDay: utils.getFirstDay(value.year, value.month),
       days: utils.getDaysInMonth(value.year, value.month),
     },
-    showForm: false
+    showForm: false,
+  }),
+
+  hideEditor: () => state => ({
+    editor: {id: false},
+    events: []
   }),
 
   renderEditor: value => state => ({
@@ -51,7 +58,7 @@ export const actions = {
   createEvent: value => (state, actions) => {
 		let data = utils.getData(value).concat(state.formData)
 
-    localStorage.setItem(value, JSON.stringify(data))
+    utils.setData(value, data)
 
     actions.cleanUpAfterAdd(value)
   },

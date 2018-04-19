@@ -31,20 +31,20 @@ body {
 .header {
     display: grid;
     grid-gap: 15px;
-        grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 .header > div {
     padding: 20px;
     text-align: center;
 }
 .header .prev-button {
-        grid-column: 1;
+    grid-column: 1;
 }
 .header .title {
-        grid-column: 2 / 7;
+    grid-column: 2 / 7;
 }
 .header .next-button {
-        grid-column: 7;
+    grid-column: 7;
 }
 .header .button {
     font-size: 24px;
@@ -66,11 +66,12 @@ body {
 .calendar .table {
     display: grid;
     grid-gap: 15px;
-        grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 .calendar .table .day {
     text-align: center;
     cursor: pointer;
+    transition: 0.5s color;
 }
 .calendar .table .day.has {
     color: var(--hilight-color);
@@ -79,10 +80,10 @@ body {
     color: #adadad;
 }
 .editor {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 300;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 .editor h2 {
     font-size: 24px;
@@ -95,19 +96,65 @@ body {
 .editor .create-event {
     color: var(--hilight-color);
 }
+.editor .empty-list-item {
+    margin-top: 20px;
+    font-size: 18px;
+}
+.editor .create-event .buttons {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto;
+    position: absolute;
+    padding: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: var(--holder-width);
+    margin: auto;
+}
+.editor .create-event .buttons .confirm-button {
+    cursor: pointer;
+}
+.editor .create-event .buttons .cancel-button {
+    cursor: pointer;
+    color: var(--main-text-color);
+}
+.editor .create-event .create-event-input-holder {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 55px auto;
+    margin-bottom: 5px;
+    padding-bottom: 9px;
+    margin-top: 9px;
+    border-bottom: 1px dotted var(--main-text-color);
+    text-align: left;
+}
+.editor .create-event .create-event-input-holder {
+    text-align: left;
+}
 .editor input {
     background: var(--holder-background);
     border: 0;
-    padding: 5px;
-    margin: 10px;
-    color: var(--main-text-color);
-    font-weight: 300;
-    font-size: 24px;
-}
-.editor ul {
-    list-style-type: none;
     padding: 0;
     margin: 0;
+    color: var(--main-text-color);
+    font-weight: 300;
+    font-size: 16px;
+}
+.editor .event-list-item {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 55px auto;
+    margin-bottom: 5px;
+    padding-bottom: 9px;
+    margin-top: 9px;
+    border-bottom: 1px dotted var(--main-text-color);
+}
+.editor .event-list-item .start {
+}
+.editor .event-list-item .name {
+    color: var(--hilight-color);
+    text-align: left;
 }
 .editor .show-form-button {
     position: absolute;
