@@ -9,8 +9,8 @@ export const HeaderItem = ({ year, month }) => (
   </div>
 )
 
-const TitleItem = ({ year, month }) => (
-  <div class="title">
+const TitleItem = ({ year, month }) => (state, actions) => (
+  <div class="title" onclick={() => actions.showToday()}>
     <h1>
       {month} / {year}
     </h1>

@@ -4,7 +4,7 @@
     --holder-width: 475px;
     --holder-background: #1d1d1d;
 
-    --main-text-color: #4c4c4c;
+    --main-text-color: #636363;
     --main-background: #191919;
 
     --cal-background: #171717;
@@ -42,6 +42,7 @@ body {
 }
 .header .title {
     grid-column: 2 / 7;
+    cursor: pointer;
 }
 .header .next-button {
     grid-column: 7;

@@ -2,17 +2,16 @@
     "name": "hyper-cal",
     "version": "0.1.0",
     "scripts": {
-        "build": "babel src -d lib",
-        "start": "webpack --config webpack.config.js"
+        "dev": "parcel ./index.html --open --no-cache",
+        "build": "parcel build ./index.html --public-url ."
     },
     "devDependencies": {
         "babel-cli": "^6.0.0",
         "babel-plugin-transform-react-jsx": "^6.24.1",
-        "babel-preset-env": "^1.6.1",
-        "webpack": "^4.4.1",
-        "webpack-cli": "^2.0.13"
+        "babel-preset-env": "^1.6.1"
     },
     "dependencies": {
+        "parcel-bundler": "^1.7.1",
         "hyperapp": "^1.2.5"
     }
 }

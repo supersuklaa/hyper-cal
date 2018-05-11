@@ -34,6 +34,20 @@ export const utils = {
 
   setData: (value, data) => localStorage.setItem(value, JSON.stringify(data)),
 
-  hasData: d => (localStorage.getItem(d)) ? true : false
+  hasData: d => (localStorage.getItem(d)) ? true : false,
+
+  getToday: () => {
+    const d = new Date()
+
+    let init = {
+      year: d.getFullYear(),
+      month: d.getMonth() + 1,
+      day: d.getDate(),
+    }
+    
+    init.id = init.year + "-" + init.month + "-" + init.day
+    
+    return init
+  }
 
 }

@@ -2,32 +2,51 @@ import { utils } from "./utils"
 
 export const actions = {
   nav: value => (state, actions) => {
-    if (value === "next")
-      actions.next()
-    else if (value === "prev")
-      actions.prev()
+    switch (value) {
+      case "next": return actions.next()
+      case "prev": return actions.prev()
+      default: return
+    }
   },
 
   next: () => (state, actions) => {
-    actions.renderCalender(
-      utils.getNextMonth(state.calendar)
-    )
-    actions.hideEditor()
+    const visible = utils.getNextMonth(state.calendar)
+    const today = utils.getToday()
+
+    actions.renderCalender(visible)
+
+    if (today.year === visible.year && today.month === visible.month) {
+      actions.renderEditor(today)
+    } else {
+      actions.hideEditor()
+    }
   },
 
   prev: () => (state, actions) => {
-    actions.renderCalender(
-      utils.getPrevMonth(state.calendar)
-    )
-    actions.hideEditor()
+    const visible = utils.getPrevMonth(state.calendar)
+    const today = utils.getToday()
+
+    actions.renderCalender(visible)
+
+    if (today.year === visible.year && today.month === visible.month) {
+      actions.renderEditor(today)
+    } else {
+      actions.hideEditor()
+    }
   },
 
-  renderCalender: value => state => ({
+  showToday: () => (state, actions) => {
+    const today = utils.getToday()
+    actions.renderCalender(today)
+    actions.renderEditor(today)
+  },
+
+  renderCalender: ({ year, month }) => state => ({
     calendar: {
-      year: value.year,
-      month: value.month,
-      firstDay: utils.getFirstDay(value.year, value.month),
-      days: utils.getDaysInMonth(value.year, value.month),
+      year: year,
+      month: month,
+      firstDay: utils.getFirstDay(year, month),
+      days: utils.getDaysInMonth(year, month),
     },
     showForm: false,
   }),
@@ -56,7 +75,7 @@ export const actions = {
   }),
 
   createEvent: value => (state, actions) => {
-		let data = utils.getData(value).concat(state.formData)
+		const data = utils.getData(value).concat(state.formData)
 
     utils.setData(value, data)
 
