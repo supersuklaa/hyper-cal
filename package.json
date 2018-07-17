@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "scripts": {
         "dev": "parcel ./index.html --open --no-cache",
-        "build": "parcel build ./index.html --public-url ."
+        "build": "parcel build ./index.html --public-url . -d docs"
     },
     "devDependencies": {
         "babel-plugin-transform-react-jsx": "^6.24.1",
