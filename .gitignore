@@ -1,7 +1,4 @@
 node_modules
-package-lock.json
-dist
+dist/
 lib
-.babelrc
-webpack.config.js
 .cache

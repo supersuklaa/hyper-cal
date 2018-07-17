@@ -1,7 +1,7 @@
-import { app } from "hyperapp"
+import { app } from 'hyperapp';
 
-import { actions } from "./actions"
-import { state } from "./state"
-import { view } from "./views"
+import actions from './actions';
+import state from './state';
+import view from './views';
 
-app(state, actions, view, document.body)
+app(state, actions, view, document.body);

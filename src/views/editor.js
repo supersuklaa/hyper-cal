@@ -1,117 +1,136 @@
-import { h } from "hyperapp"
-import { actions } from "../actions"
+import { h } from 'hyperapp';
 
-export const EditorItem = ({ editor, showForm }) => {
-  const content = showForm ? (
-    <CreateEventForm editor={editor} />
-  ) : (
-    <EventList />
-  )
+export default () => ({ showForm }) => {
+  if (showForm) {
+    return (
+      <div class='editor'>
+        <CreateEventForm />
+      </div>
+    );
+  }
 
   return (
-    <div class="editor">
-      {content}
+    <div class='editor'>
+      <EventList />
     </div>
-  )
-}
+  );
+};
 
-const EventList = ({ }) => (state, actions) => (
-  <div class="event-list ">
-    {state.events.map(({ name, start }) => (
+const EventList = () => ({ events }) => (
+  <div class='event-list'>
+    {events.map(({ name, start }) => (
       <EventListItem name={name} start={start} />
     ))}
-    {state.events.length < 1 &&
+    {events.length < 1 &&
       <EmptyListItem />
     }
-    <CreateEventButton />
-  </div>
-)
-
-const EmptyListItem = ({ }) => (state, actions) => {
-  return state.editor.id ? (
-    <div class="empty-list-item">
-      <p>
-        Seem like there is nothing worth mentioning happening :(
-      </p>
-      <p>
-        Make something great happen by clicking + sign below!
-      </p>
+    <div class='buttons'>
+      <CreateEventButton />
     </div>
-  ) : (
-    <div class="empty-list-item">
+  </div>
+);
+
+const EmptyListItem = () => ({ editor }) => {
+  if (editor.id) {
+    return (
+      <div class='empty-list-item'>
+        <p>
+          Seem like there is nothing worth mentioning happening :(
+        </p>
+        <p>
+          Make something great happen by clicking + sign below!
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div class='empty-list-item'>
       <p>
         Pick a date you like!
       </p>
     </div>
-  )
-}
+  );
+};
 
-const CreateEventButton = ({ }) => (state, actions) => {
-  if (!state.editor.id) {
-    return null
+const CreateEventButton = () => ({ editor }, { showForm }) => {
+  if (!editor.id) {
+    return null;
   }
 
   return (
-    <div class="show-form-button" onclick={() => actions.showForm()}>
+    <div class='show-form-button' onclick={() => showForm()}>
       +
     </div>
-  )
-}
+  );
+};
 
-const EventListItem = ({ name, start }) => (
-  <div class="event-list-item">
-    <div class="start">{start}</div>
-    <div class="name">{name}</div>
+// const RemoveEventsButton = () => (state, actions) => {
+//   if (state.events.length < 1) {
+//     return null;
+//   }
+
+//   return (
+//     <div class='remove-events-button' onclick={() => actions.showForm()}>
+//       -
+//     </div>
+//   );
+// };
+
+const EventListItem = ({ name, start }) => (state, { hilightEvent }) => (
+  <div class='event-list-item' onclick={() => hilightEvent('hellou')}>
+    <div class='start'>{start}</div>
+    <div class='name'>{name}</div>
   </div>
-)
+);
 
-const CreateEventForm = ({ editor }) => (
-  <div class="create-event">
+const CreateEventForm = () => ({ editor }) => (
+  <div class='create-event'>
     <NameInput />
     <StartTimeInput />
-    <div class="buttons">
+    <div class='buttons'>
       <CancelButton editor={editor} />
       <ConfirmButton id={editor.id} />
     </div>
   </div>
-)
+);
 
-const NameInput = ({ }) => (state, actions) => (
-  <div class="create-event-name create-event-input-holder">
+const NameInput = () => (state, { setName }) => (
+  <div class='create-event-name create-event-input-holder'>
     <div>
       Name:
-    </div> 
+    </div>
     <div>
       <input
-        type="text"
-        onchange={e => actions.setName(e.target.value)}
+        type='text'
+        onchange={e => setName(e.target.value)}
       />
-    </div> 
+    </div>
   </div>
-)
+);
 
-const StartTimeInput = ({ }) => (state, actions) => (
-  <div class="create-event-start create-event-input-holder">
+const StartTimeInput = () => (state, { setStartTime }) => (
+  <div class='create-event-start create-event-input-holder'>
     <div>
-      Start: 
-    </div> 
+      Start:
+    </div>
     <div>
       <input
-        type="time"
-        onchange={e => actions.setStartTime(e.target.value)}
+        type='time'
+        onchange={e => setStartTime(e.target.value)}
       />
-    </div> 
+    </div>
   </div>
-)
+);
 
-const CancelButton = ({ editor }) => (state, actions) => (
-  <div class="cancel-button" onclick={() => actions.renderEditor(editor)}>
+const CancelButton = ({ editor }) => (state, { renderEditor }) => (
+  <div class='cancel-button' onclick={() => renderEditor(editor)}>
     Cancel
   </div>
-)
+);
 
-const ConfirmButton = ({ id }) => (state, actions) => (
-  <div class="confirm-button" onclick={() => actions.createEvent(id)}>
+const ConfirmButton = ({ id }) => (state, { createEvent }) => (
+  <div class='confirm-button' onclick={() => createEvent(id)}>
     Confirm
   </div>
-)
+);

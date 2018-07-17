@@ -1,20 +1,36 @@
-import { utils } from "./utils"
+import utils from './utils';
 
-const { year, month, day, id } = utils.getToday()
-const firstDay = utils.getFirstDay(year, month)
-const days = utils.getDaysInMonth(year, month)
+const {
+  year,
+  month,
+  day,
+  id,
+} = utils.getToday();
 
-export const state = {
-  calendar: { year, month, firstDay, days },
+const firstDay = utils.getFirstDay(year, month);
+const days = utils.getDaysInMonth(year, month);
 
-  editor: { year, month, day, id },
+export default {
+  calendar: {
+    year,
+    month,
+    firstDay,
+    days,
+  },
+
+  editor: {
+    year,
+    month,
+    day,
+    id,
+  },
 
   events: utils.getData(id),
 
   showForm: false,
 
   formData: {
-    name: "",
-    start: ""
-  }
-}
+    name: '',
+    start: '',
+  },
+};

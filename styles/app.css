@@ -101,10 +101,10 @@ body {
     margin-top: 20px;
     font-size: 18px;
 }
-.editor .create-event .buttons {
+.editor .buttons {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(auto-fit, minmax(5px, 1fr));
     position: absolute;
     padding: 12px;
     bottom: 0;
@@ -158,11 +158,6 @@ body {
     text-align: left;
 }
 .editor .show-form-button {
-    position: absolute;
-    padding: 12px;
-    bottom: 0;
-    left: 0;
-    right: 0;
     font-weight: 700;
     color: var(--hilight-color);
     cursor: pointer;

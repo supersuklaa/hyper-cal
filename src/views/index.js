@@ -1,24 +1,20 @@
-import { h } from "hyperapp"
-import { actions } from "../actions"
-import { HeaderItem } from "./header"
-import { CalendarItem } from "./calendar"
-import { EditorItem } from "./editor"
+import { h } from 'hyperapp';
+import Header from './header';
+import Calendar from './calendar';
+import Editor from './editor';
 
-export const view = (state, actions) => (
-  <div id="holder">
-    <HeaderItem
-      year={state.calendar.year}
-      month={state.calendar.month}
+export default ({ calendar }) => (
+  <div id='holder'>
+    <Header
+      year={calendar.year}
+      month={calendar.month}
     />
-    <CalendarItem
-      year={state.calendar.year}
-      month={state.calendar.month}
-      firstDay={state.calendar.firstDay}
-      days={state.calendar.days}
+    <Calendar
+      year={calendar.year}
+      month={calendar.month}
+      firstDay={calendar.firstDay}
+      days={calendar.days}
     />
-    <EditorItem
-      editor={state.editor}
-      showForm={state.showForm}
-    />
+    <Editor />
   </div>
-)
+);

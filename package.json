@@ -3,15 +3,20 @@
     "version": "0.1.0",
     "scripts": {
         "dev": "parcel ./index.html --open --no-cache",
-        "build": "parcel build ./index.html --public-url ."
+        "build": "parcel build ./index.html"
     },
     "devDependencies": {
-        "babel-cli": "^6.0.0",
         "babel-plugin-transform-react-jsx": "^6.24.1",
-        "babel-preset-env": "^1.6.1"
+        "babel-preset-env": "^1.7.0",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-plugin-import": "^2.12.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-react": "^7.9.1"
     },
     "dependencies": {
-        "parcel-bundler": "^1.7.1",
-        "hyperapp": "^1.2.5"
+        "eslint": "^5.1.0",
+        "hyperapp": "^1.2.6",
+        "parcel-bundler": "^1.9.7",
+        "parcel-plugin-clean-dist": "0.0.6"
     }
 }
