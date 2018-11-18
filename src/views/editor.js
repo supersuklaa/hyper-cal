@@ -1,10 +1,16 @@
 import { h } from 'hyperapp';
 
-export default () => ({ showForm }) => {
+export default () => ({ showForm, showDeleteList }) => {
   if (showForm) {
     return (
       <div class='editor'>
         <CreateEventForm />
+      </div>
+    );
+  } else if (showDeleteList) {
+    return (
+      <div class='editor'>
+        <DeleteEventsList />
       </div>
     );
   }
@@ -16,7 +22,36 @@ export default () => ({ showForm }) => {
   );
 };
 
-const EventList = () => ({ events }) => (
+const DeleteEventsList = () => ({ events, editor }, { selectDelete }) => (
+  <div class='event-list'>
+    <div class='delete-disclaimer'>
+      If you are sure, select the name of the event you want to remove.
+    </div>
+
+    <div>
+      <select onchange={e => selectDelete(e.srcElement)}>
+        <option selected disabled>Choose one</option>
+        {events.map(({ name, start }, i) => {
+          if (start) {
+            return (
+              <option value={i}>{start} - {name}</option>
+            );
+          }
+          return (
+            <option value={i}>{name}</option>
+          );
+        })}
+      </select>
+    </div>
+
+    <div class='buttons'>
+      <CancelButton editor={editor} />
+      <ConfirmDeleteButton id={editor.id} />
+    </div>
+  </div>
+);
+
+const EventList = () => ({ events, editor }) => (
   <div class='event-list'>
     {events.map(({ name, start }) => (
       <EventListItem name={name} start={start} />
@@ -24,9 +59,12 @@ const EventList = () => ({ events }) => (
     {events.length < 1 &&
       <EmptyListItem />
     }
-    <div class='buttons'>
-      <CreateEventButton />
-    </div>
+    {editor.id &&
+      <div class='buttons'>
+        <DeleteEventsButton />
+        <CreateEventButton />
+      </div>
+    }
   </div>
 );
 
@@ -53,32 +91,27 @@ const EmptyListItem = () => ({ editor }) => {
   );
 };
 
-const CreateEventButton = () => ({ editor }, { showForm }) => {
-  if (!editor.id) {
-    return null;
+const CreateEventButton = () => (state, { showForm }) => (
+  <div class='show-form-button' onclick={() => showForm()}>
+    Create event
+  </div>
+);
+
+
+const DeleteEventsButton = () => ({ events }, actions) => {
+  if (events.length > 0) {
+    return (
+      <div class='remove-events-button' onclick={() => actions.showDeleteList()}>
+        Remove event
+      </div>
+    );
   }
 
-  return (
-    <div class='show-form-button' onclick={() => showForm()}>
-      +
-    </div>
-  );
+  return null;
 };
 
-// const RemoveEventsButton = () => (state, actions) => {
-//   if (state.events.length < 1) {
-//     return null;
-//   }
-
-//   return (
-//     <div class='remove-events-button' onclick={() => actions.showForm()}>
-//       -
-//     </div>
-//   );
-// };
-
-const EventListItem = ({ name, start }) => (state, { hilightEvent }) => (
-  <div class='event-list-item' onclick={() => hilightEvent('hellou')}>
+const EventListItem = ({ name, start }) => () => (
+  <div class='event-list-item'>
     <div class='start'>{start}</div>
     <div class='name'>{name}</div>
   </div>
@@ -97,7 +130,7 @@ const CreateEventForm = () => ({ editor }) => (
 
 const NameInput = () => (state, { setName }) => (
   <div class='create-event-name create-event-input-holder'>
-    <div>
+    <div class='label'>
       Name:
     </div>
     <div>
@@ -111,7 +144,7 @@ const NameInput = () => (state, { setName }) => (
 
 const StartTimeInput = () => (state, { setStartTime }) => (
   <div class='create-event-start create-event-input-holder'>
-    <div>
+    <div class='label'>
       Start:
     </div>
     <div>
@@ -134,3 +167,13 @@ const ConfirmButton = ({ id }) => (state, { createEvent }) => (
     Confirm
   </div>
 );
+
+const ConfirmDeleteButton = ({ id }) => ({ deleteId }, { deleteEvents }) => {
+  if (deleteId !== null) {
+    return (
+      <div class='confirm-button' onclick={() => deleteEvents(id)}>
+        Confirm
+      </div>
+    );
+  }
+};

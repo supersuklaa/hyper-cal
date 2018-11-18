@@ -25,22 +25,26 @@ export default {
     ? JSON.parse(localStorage.getItem(id))
     : []),
 
-  setData: (value, data) => localStorage.setItem(value, JSON.stringify(data)),
+  setData: (key, events) => localStorage.setItem(key, JSON.stringify(events)),
 
-  hasData: d => (!!(localStorage.getItem(d))),
+  remoteData: key => localStorage.removeItem(key),
+
+  hasData: id => (!!(localStorage.getItem(id))),
 
   getToday: () => {
     const d = new Date();
 
-    const init = {
-      year: d.getFullYear(),
-      month: d.getMonth() + 1,
-      day: d.getDate(),
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const id = `${year}-${month}-${day}`;
+
+    return {
+      year,
+      month,
+      day,
+      id,
     };
-
-    init.id = `${init.year}-${init.month}-${init.day}`;
-
-    return init;
   },
 
 };

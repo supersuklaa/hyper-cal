@@ -29,6 +29,10 @@ export default {
 
   showForm: false,
 
+  showDeleteList: false,
+
+  deleteId: null,
+
   formData: {
     name: '',
     start: '',

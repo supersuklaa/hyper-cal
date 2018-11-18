@@ -8,24 +8,22 @@ export default ({ year, month }) => (
   </div>
 );
 
-const TitleItem = ({ year, month }) => (state, actions) => (
-  <div class='title' onclick={() => actions.showToday()}>
+const TitleItem = ({ year, month }) => (state, { showToday }) => (
+  <div class='title' onclick={() => showToday()}>
     <h1>
       {month} / {year}
     </h1>
   </div>
 );
 
-const PrevButton = () => (
-  <Button type='prev'>«</Button>
+const PrevButton = () => (state, { nav }) => (
+  <div class='button prev-button' onclick={() => nav('prev')}>
+    «
+  </div>
 );
 
-const NextButton = () => (
-  <Button type='next'>»</Button>
-);
-
-const Button = ({ type }, children) => (state, actions) => (
-  <div class={`button ${type}-button`} onclick={() => actions.nav(type)}>
-    {children}
+const NextButton = () => (state, { nav }) => (
+  <div class='button next-button' onclick={() => nav('next')}>
+    »
   </div>
 );
