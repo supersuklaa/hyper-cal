@@ -51,9 +51,16 @@ const DeleteEventsList = () => ({ events, editor }, { selectDelete }) => (
   </div>
 );
 
+const sorter = (a, b) => {
+  const aStart = +a.start.replace(/\D/g, '');
+  const bStart = +b.start.replace(/\D/g, '');
+
+  return aStart - bStart;
+};
+
 const EventList = () => ({ events, editor }) => (
   <div class='event-list'>
-    {events.map(({ name, start }) => (
+    {events.sort(sorter).map(({ name, start }) => (
       <EventListItem name={name} start={start} />
     ))}
     {events.length < 1 &&
@@ -169,11 +176,12 @@ const ConfirmButton = ({ id }) => (state, { createEvent }) => (
 );
 
 const ConfirmDeleteButton = ({ id }) => ({ deleteId }, { deleteEvents }) => {
-  if (deleteId !== null) {
-    return (
-      <div class='confirm-button' onclick={() => deleteEvents(id)}>
-        Confirm
-      </div>
-    );
+  if (deleteId === null) {
+    return null;
   }
+  return (
+    <div class='confirm-button' onclick={() => deleteEvents(id)}>
+      Confirm
+    </div>
+  );
 };
