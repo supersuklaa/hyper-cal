@@ -6,6 +6,7 @@
         "build": "parcel build ./index.html --public-url . -d docs"
     },
     "devDependencies": {
+        "babel-core": "^6.26.3",
         "babel-plugin-transform-react-jsx": "^6.24.1",
         "babel-preset-env": "^1.7.0",
         "eslint-config-airbnb": "^16.1.0",
@@ -17,7 +18,7 @@
     "dependencies": {
         "eslint": "^5.1.0",
         "hyperapp": "^1.2.6",
-        "parcel-bundler": "^1.9.7",
+        "parcel-bundler": "^1.10.3",
         "parcel-plugin-clean-dist": "0.0.6"
     }
 }
